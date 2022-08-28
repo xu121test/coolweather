@@ -12,10 +12,12 @@ import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,6 +38,7 @@ import okhttp3.Response;
 public class WeatherActivity extends AppCompatActivity {
     public DrawerLayout drawerLayout;
     private Button navButton;
+    private Button settingButton;
     public SwipeRefreshLayout swipeRefresh;
     private ScrollView weatherLayout;
     private TextView titleCity;
@@ -76,6 +79,7 @@ public class WeatherActivity extends AppCompatActivity {
         swipeRefresh = findViewById(R.id.swip_refresh);
         drawerLayout = findViewById(R.id.drawer_layout);
         navButton = findViewById(R.id.nav_button);
+        settingButton=findViewById(R.id.setting_button);
         navButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -109,6 +113,32 @@ public class WeatherActivity extends AppCompatActivity {
         } else {
             loadBingPic();
         }
+        settingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PopupMenu popupMenu = new PopupMenu(WeatherActivity.this, view);
+                popupMenu.getMenuInflater().inflate(R.menu.new_menu, popupMenu.getMenu());
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem menuItem) {
+                        switch (menuItem.getItemId()) {
+                            case R.id.setting:
+                                Intent intent = new Intent(WeatherActivity.this, SettingActivity.class);
+                                startActivityForResult(intent, 1);
+                                break;
+                            default:
+                        }
+                        return true;
+                    }
+                });
+                popupMenu.setOnDismissListener(new PopupMenu.OnDismissListener() {
+                    @Override
+                    public void onDismiss(PopupMenu popupMenu) {
+                    }
+                });
+                popupMenu.show();
+            }
+        });
     }
 
     /**

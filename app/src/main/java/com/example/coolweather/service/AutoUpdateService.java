@@ -11,6 +11,7 @@ import android.preference.PreferenceManager;
 
 import com.example.coolweather.gson.Weather;
 import com.example.coolweather.util.HttpUtil;
+import com.example.coolweather.util.SettingInfo;
 import com.example.coolweather.util.Utility;
 
 import java.io.IOException;
@@ -20,6 +21,7 @@ import okhttp3.Callback;
 import okhttp3.Response;
 
 public class AutoUpdateService extends Service {
+    private int anHour;
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -28,10 +30,16 @@ public class AutoUpdateService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        updateWeather();
+        SettingInfo settingInfo = intent.getParcelableExtra("setting_data");
+        if (settingInfo != null) {
+            if (settingInfo.isAllowUpdate()) {
+                updateWeather();
+            }
+            anHour = (settingInfo.getUpdate()) * 60 * 60 * 1000;//8小时的毫秒数
+        }
+//        updateWeather();
         updateBingPic();
         AlarmManager manager = (AlarmManager) getSystemService(ALARM_SERVICE);
-        int anHour = 1 * 60 * 60 * 1000;//8小时的毫秒数
         long triggerAtTime = SystemClock.elapsedRealtime() + anHour;
         Intent i = new Intent(this, AutoUpdateService.class);
         PendingIntent pi = PendingIntent.getService(this, 0, i, 0);
@@ -61,10 +69,10 @@ public class AutoUpdateService extends Service {
                 @Override
                 public void onResponse(Call call, Response response) throws IOException {
                     String responseText = response.body().string();
-                    Weather weather=Utility.handleWeatherResponse(responseText);
-                    if (weather!=null && "ok".equals(weather.status)){
-                        SharedPreferences.Editor editor=PreferenceManager.getDefaultSharedPreferences(AutoUpdateService.this).edit();
-                        editor.putString("weather",responseText);
+                    Weather weather = Utility.handleWeatherResponse(responseText);
+                    if (weather != null && "ok".equals(weather.status)) {
+                        SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(AutoUpdateService.this).edit();
+                        editor.putString("weather", responseText);
                         editor.apply();
                     }
                 }
@@ -76,7 +84,7 @@ public class AutoUpdateService extends Service {
      * 更新必应每日一图
      */
     private void updateBingPic() {
-        String requestBingPic="http://guolin.tech/api/bing_pic";
+        String requestBingPic = "http://guolin.tech/api/bing_pic";
         HttpUtil.sendOKHttpRequest(requestBingPic, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
@@ -85,9 +93,9 @@ public class AutoUpdateService extends Service {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                String bingPic=response.body().string();
-                SharedPreferences.Editor editor=PreferenceManager.getDefaultSharedPreferences(AutoUpdateService.this).edit();
-                editor.putString("bing_pic",bingPic);
+                String bingPic = response.body().string();
+                SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(AutoUpdateService.this).edit();
+                editor.putString("bing_pic", bingPic);
                 editor.apply();
             }
         });

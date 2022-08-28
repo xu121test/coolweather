@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/ASProjects/CoolWeather/app/src/main/res/layout/activity_main.xml" value="0.10696266397578204" />
+        <entry key="..\:/ASProjects/CoolWeather/app/src/main/res/layout/activity_setting.xml" value="0.14492753623188406" />
         <entry key="..\:/ASProjects/CoolWeather/app/src/main/res/layout/activity_weather.xml" value="0.1" />
         <entry key="..\:/ASProjects/CoolWeather/app/src/main/res/layout/aqi.xml" value="0.2" />
         <entry key="..\:/ASProjects/CoolWeather/app/src/main/res/layout/choose_area.xml" value="0.2" />
@@ -12,6 +13,7 @@
         <entry key="..\:/ASProjects/CoolWeather/app/src/main/res/layout/now.xml" value="0.1" />
         <entry key="..\:/ASProjects/CoolWeather/app/src/main/res/layout/suggestion.xml" value="0.1" />
         <entry key="..\:/ASProjects/CoolWeather/app/src/main/res/layout/title.xml" value="0.1" />
+        <entry key="..\:/ASProjects/CoolWeather/app/src/main/res/menu/new_menu.xml" value="0.22083333333333333" />
         <entry key="..\:/ASProjects/app/src/main/res/layout/activity_main.xml" value="0.11911231884057971" />
       </map>
     </option>

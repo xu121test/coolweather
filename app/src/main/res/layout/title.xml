@@ -16,7 +16,9 @@
         android:id="@+id/title_city"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+       android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="100dp"
         android:textColor="#fff"
         android:textSize="20sp" />
 
@@ -24,11 +26,19 @@
         android:id="@+id/title_update_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginRight="100dp"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:layout_marginRight="10dp"
         android:textColor="#fff"
         android:textSize="16sp" />
 
-
+    <Button
+        android:id="@+id/setting_button"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/menu"
+        android:foreground="?android:attr/selectableItemBackground" />
 </RelativeLayout>

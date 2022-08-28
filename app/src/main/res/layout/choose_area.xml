@@ -7,14 +7,16 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="?attr/actionBarSize"
         android:background="@color/teal_200">
 
         <TextView
             android:id="@+id/title_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="5dp"
             android:textColor="#fff"
             android:textSize="20sp" />
 
@@ -23,8 +25,9 @@
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
+            android:layout_alignParentBottom="true"
             android:layout_marginLeft="10dp"
+            android:layout_marginBottom="5dp"
             android:background="@drawable/ic_back" />
     </RelativeLayout>
 
