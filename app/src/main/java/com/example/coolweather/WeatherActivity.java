@@ -82,7 +82,7 @@ public class WeatherActivity extends AppCompatActivity {
                 drawerLayout.openDrawer(GravityCompat.START);
             }
         });
-        swipeRefresh.setColorSchemeResources(R.color.design_default_color_primary);
+        swipeRefresh.setColorSchemeResources(R.color.design_dark_default_color_secondary);
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         String weatherString = prefs.getString("weather", null);
         final String weatherId;
@@ -213,9 +213,9 @@ public class WeatherActivity extends AppCompatActivity {
                 aqiText.setText(weather.aqi.city.aqi);
                 pm25Text.setText(weather.aqi.city.pm25);
             }
-            String comfort = "舒适度" + weather.suggestion.comfort.info;
-            String carWash = "洗车指数" + weather.suggestion.carWash.info;
-            String sport = "运动建议" + weather.suggestion.sport.info;
+            String comfort = "舒适度——" + weather.suggestion.comfort.info;
+            String carWash = "洗车指数——" + weather.suggestion.carWash.info;
+            String sport = "运动建议——" + weather.suggestion.sport.info;
             comfortText.setText(comfort);
             carWashText.setText(carWash);
             sportText.setText(sport);
