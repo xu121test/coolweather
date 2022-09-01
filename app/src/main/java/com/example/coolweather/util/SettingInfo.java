@@ -13,10 +13,18 @@ public class SettingInfo implements Parcelable {
     public SettingInfo() {
     }
 
-    public SettingInfo(boolean isAllowUpdate, int update) {
-        this.isAllowUpdate = isAllowUpdate;
+    public SettingInfo(int update) {
         this.update = update;
     }
+
+    public SettingInfo(boolean isAllowUpdate) {
+        this.isAllowUpdate = isAllowUpdate;
+    }
+
+   /* public SettingInfo(boolean isAllowUpdate, int update) {
+        this.isAllowUpdate = isAllowUpdate;
+        this.update = update;
+    }*/
 
     public int getUpdate() {
         return update;

@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.os.IBinder;
 import android.os.SystemClock;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
 import com.example.coolweather.gson.Weather;
 import com.example.coolweather.util.HttpUtil;
@@ -34,17 +35,16 @@ public class AutoUpdateService extends Service {
         if (settingInfo != null) {
             if (settingInfo.isAllowUpdate()) {
                 updateWeather();
+                anHour = (settingInfo.getUpdate()) * 60 * 60 * 1000;//8小时的毫秒数
+                AlarmManager manager = (AlarmManager) getSystemService(ALARM_SERVICE);
+                long triggerAtTime = SystemClock.elapsedRealtime() + anHour;
+                Intent i = new Intent(this, AutoUpdateService.class);
+                PendingIntent pi = PendingIntent.getService(this, 0, i, 0);
+                manager.cancel(pi);
+                manager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, triggerAtTime, pi);
             }
-            anHour = (settingInfo.getUpdate()) * 60 * 60 * 1000;//8小时的毫秒数
         }
-//        updateWeather();
         updateBingPic();
-        AlarmManager manager = (AlarmManager) getSystemService(ALARM_SERVICE);
-        long triggerAtTime = SystemClock.elapsedRealtime() + anHour;
-        Intent i = new Intent(this, AutoUpdateService.class);
-        PendingIntent pi = PendingIntent.getService(this, 0, i, 0);
-        manager.cancel(pi);
-        manager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, triggerAtTime, pi);
         return super.onStartCommand(intent, flags, startId);
     }
 
